@@ -1,0 +1,19 @@
+definition_version: 2
+entities:
+  streamlit_app:
+    type: streamlit
+    identifier:
+      database: SMOOTHIES
+      schema: PUBLIC
+      name: UNTITLED_1
+    title: Custom Smoothie Order Form
+    query_warehouse: COMPUTE_WH
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    run_mode: SpcsOnly
+    execute_as: OWNER
+    main_file: Custom Smoothie Order.py
+    artifacts:
+      - pyproject.toml
+      - Custom Smoothie Order.py
+      - .streamlit/config.toml
+    idle_auto_shutdown_time_seconds: 86400
