@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 from snowflake.snowpark.functions import col
 
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -55,3 +56,20 @@ if ingredients_list:
                 f"Your Smoothie is ordered, {name_on_order.strip()}!",
                 icon="✅"
             )
+# Call the SmoothieFroot API
+try:
+    smoothiefroot_response = requests.get(
+        "https://my.smoothiefroot.com/api/fruit/watermelon",
+        timeout=10
+    )
+
+    smoothiefroot_response.raise_for_status()
+
+    smoothiefroot_data = smoothiefroot_response.json()
+
+    st.subheader("SmoothieFroot Nutrition Information")
+    st.write(smoothiefroot_data)
+    st.dataframe(smoothiefroot_data)
+
+except requests.exceptions.RequestException as error:
+    st.error(f"Unable to retrieve fruit information: {error}")
